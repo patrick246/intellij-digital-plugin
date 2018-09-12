@@ -1,0 +1,42 @@
+{
+    parserClass="de.patrick246.intellij.digitalplugin.parser.DAParser"
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix="DA"
+    psiImplClassSuffix="Impl"
+    psiPackage="de.patrick246.intellij.digitalplugin.psi"
+    psiImplPackage="de.patrick246.intellij.digitalplugin.psi.impl"
+
+    elementTypeHolderClass="de.patrick246.intellij.digitalplugin.psi.DATypes"
+    elementTypeClass="de.patrick246.intellij.digitalplugin.psi.DAElementType"
+    tokenTypeClass="de.patrick246.intellij.digitalplugin.psi.DATokenType"
+}
+
+daFile ::= line (NEWLINE line)*
+line ::=  [instruction] [commentLine]
+
+instruction ::= (simpleInstructionLine|
+                            regRegInstructionLine|
+                            regImmInstructionLine|
+                            regInstructionLine|
+                            immInstructionLine|
+                            immRegInstructionLine|
+                            indRegRegInstructionLine|
+                            regIndRegInstructionLine|
+                            indCalcRegInstruction|
+                            regIndCalcInstruction|
+                            commentLine)
+simpleInstructionLine ::= SIMPLEINSTRUCTION
+regRegInstructionLine ::= REGREGINSTRUCTION register COMMA register
+regImmInstructionLine ::= REGIMMINSTRUCTION register COMMA CONSTVAL
+regInstructionLine ::= REGINSTRUCTION register
+immInstructionLine ::= IMMINSTRUCTION CONSTVAL
+immRegInstructionLine ::= IMMREGINSTRUCTION CONSTVAL COMMA register
+indRegRegInstructionLine ::= INDREGREGINSTRUCTION indRegister COMMA register
+regIndRegInstructionLine ::= REGINDREGINSTRUCTION register COMMA indRegister
+indCalcRegInstruction ::= INDCALCREGINSTRUCTION indCalcRegister COMMA register
+regIndCalcInstruction ::= REGINDCALCINSTRUCTION register COMMA indCalcRegister
+register ::= (REGNUMBER | REGISTERALIAS)
+indRegister ::= "[" register "]"
+commentLine ::= COMMENTCHAR TEXT
+indCalcRegister ::= "[" register "+" REGNUMBER "]"
