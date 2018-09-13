@@ -13,7 +13,7 @@
 }
 
 daFile ::= line (NEWLINE line)*
-line ::=  [instruction] [commentLine]
+line ::=  [label] [('.' directive | instruction)] [commentLine]
 
 instruction ::= (simpleInstructionLine|
                             regRegInstructionLine|
@@ -26,17 +26,35 @@ instruction ::= (simpleInstructionLine|
                             indCalcRegInstruction|
                             regIndCalcInstruction|
                             commentLine)
+// various different formats for instruction parameters
 simpleInstructionLine ::= SIMPLEINSTRUCTION
 regRegInstructionLine ::= REGREGINSTRUCTION register COMMA register
-regImmInstructionLine ::= REGIMMINSTRUCTION register COMMA CONSTVAL
+regImmInstructionLine ::= REGIMMINSTRUCTION register COMMA expr
 regInstructionLine ::= REGINSTRUCTION register
-immInstructionLine ::= IMMINSTRUCTION CONSTVAL
-immRegInstructionLine ::= IMMREGINSTRUCTION CONSTVAL COMMA register
+immInstructionLine ::= IMMINSTRUCTION expr
+immRegInstructionLine ::= IMMREGINSTRUCTION expr COMMA register
 indRegRegInstructionLine ::= INDREGREGINSTRUCTION indRegister COMMA register
 regIndRegInstructionLine ::= REGINDREGINSTRUCTION register COMMA indRegister
 indCalcRegInstruction ::= INDCALCREGINSTRUCTION indCalcRegister COMMA register
 regIndCalcInstruction ::= REGINDCALCINSTRUCTION register COMMA indCalcRegister
-register ::= (REGNUMBER | REGISTERALIAS)
+
+// parameter types
+register ::= (REGNUMBER | ALIAS)
 indRegister ::= "[" register "]"
-commentLine ::= COMMENTCHAR TEXT
-indCalcRegister ::= "[" register "+" REGNUMBER "]"
+commentLine ::= COMMENTCHAR COMMENTTEXT
+indCalcRegister ::= "[" register "+" expr "]"
+expr ::= term '+' expr | term '-' expr | term
+term ::= factor '*' term | factor '/' term | factor
+factor ::= '(' expr ')' | HEXNUM | ALIAS
+
+// assembler directives
+directive ::= (aliasDirectiveLine | aliasRegisterDirectiveLine | stringDirectiveLine | aliasMultivalueDirectiveLine | aliasExprDirectiveLine)
+aliasDirectiveLine ::= ALIASDIRECTIVE ALIAS
+aliasRegisterDirectiveLine ::= ALIASREGISTERDIRECTIVE registerAliasDefinition REGNUMBER
+registerAliasDefinition ::= ALIASDEFINITIONTOKEN
+stringDirectiveLine ::=  STRINGDIRECTIVE STRINGTEXT
+aliasMultivalueDirectiveLine ::= ALIASMULTIVALUEDIRECTIVE expr (',' expr)*
+aliasExprDirectiveLine ::= ALIASEXPRDIRECTIVE immediateAliasDefinition expr
+immediateAliasDefinition ::= ALIASDEFINITIONTOKEN
+
+label ::= LABELDEFINITION COLON

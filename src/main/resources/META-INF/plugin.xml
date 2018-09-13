@@ -18,6 +18,8 @@
         <fileTypeFactory implementation="de.patrick246.intellij.digitalplugin.language.DAFileTypeFactory" />
         <lang.parserDefinition language="DigitalAssembler" implementationClass="de.patrick246.intellij.digitalplugin.language.DAParserDefinition" />
         <moduleType id="DIGITAL_ASSEMBLER_MODULE_TYPE" implementationClass="de.patrick246.intellij.digitalplugin.module.DAModuleType" />
+        <lang.syntaxHighlighterFactory language="DigitalAssembler" implementationClass="de.patrick246.intellij.digitalplugin.language.highlighting.DASyntaxHighlighterFactory"/>
+        <completion.contributor language="DigitalAssembler" implementationClass="de.patrick246.intellij.digitalplugin.language.completion.DACompletionContributor"/>
     </extensions>
 
     <actions>
