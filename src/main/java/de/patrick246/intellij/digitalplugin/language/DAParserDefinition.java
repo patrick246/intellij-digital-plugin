@@ -1,4 +1,4 @@
-package de.patrick246.intellij.digitalplugin;
+package de.patrick246.intellij.digitalplugin.language;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
@@ -11,9 +11,9 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import de.patrick246.intellij.digitalplugin.parser.DAParser;
-import de.patrick246.intellij.digitalplugin.psi.DAFile;
-import de.patrick246.intellij.digitalplugin.psi.DATypes;
+import de.patrick246.intellij.digitalplugin.language.parser.DAParser;
+import de.patrick246.intellij.digitalplugin.language.psi.DAFile;
+import de.patrick246.intellij.digitalplugin.language.psi.DATypes;
 import org.jetbrains.annotations.NotNull;
 
 public class DAParserDefinition implements ParserDefinition {

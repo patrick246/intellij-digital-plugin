@@ -15,8 +15,9 @@
     -->
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileTypeFactory implementation="de.patrick246.intellij.digitalplugin.DAFileTypeFactory" />
-        <lang.parserDefinition language="DigitalAssembler" implementationClass="de.patrick246.intellij.digitalplugin.DAParserDefinition" />
+        <fileTypeFactory implementation="de.patrick246.intellij.digitalplugin.language.DAFileTypeFactory" />
+        <lang.parserDefinition language="DigitalAssembler" implementationClass="de.patrick246.intellij.digitalplugin.language.DAParserDefinition" />
+        <moduleType id="DIGITAL_ASSEMBLER_MODULE_TYPE" implementationClass="de.patrick246.intellij.digitalplugin.module.DAModuleType" />
     </extensions>
 
     <actions>

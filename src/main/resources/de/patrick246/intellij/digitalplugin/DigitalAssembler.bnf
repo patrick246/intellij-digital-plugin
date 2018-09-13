@@ -1,15 +1,15 @@
 {
-    parserClass="de.patrick246.intellij.digitalplugin.parser.DAParser"
+    parserClass="de.patrick246.intellij.digitalplugin.language.parser.DAParser"
     extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
     psiClassPrefix="DA"
     psiImplClassSuffix="Impl"
-    psiPackage="de.patrick246.intellij.digitalplugin.psi"
-    psiImplPackage="de.patrick246.intellij.digitalplugin.psi.impl"
+    psiPackage="de.patrick246.intellij.digitalplugin.language.psi"
+    psiImplPackage="de.patrick246.intellij.digitalplugin.language.psi.impl"
 
-    elementTypeHolderClass="de.patrick246.intellij.digitalplugin.psi.DATypes"
-    elementTypeClass="de.patrick246.intellij.digitalplugin.psi.DAElementType"
-    tokenTypeClass="de.patrick246.intellij.digitalplugin.psi.DATokenType"
+    elementTypeHolderClass="de.patrick246.intellij.digitalplugin.language.psi.DATypes"
+    elementTypeClass="de.patrick246.intellij.digitalplugin.language.psi.DAElementType"
+    tokenTypeClass="de.patrick246.intellij.digitalplugin.language.psi.DATokenType"
 }
 
 daFile ::= line (NEWLINE line)*

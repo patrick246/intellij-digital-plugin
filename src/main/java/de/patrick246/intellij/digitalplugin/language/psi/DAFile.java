@@ -1,11 +1,11 @@
-package de.patrick246.intellij.digitalplugin.psi;
+package de.patrick246.intellij.digitalplugin.language.psi;
 
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import de.patrick246.intellij.digitalplugin.DAFileType;
-import de.patrick246.intellij.digitalplugin.DALanguage;
+import de.patrick246.intellij.digitalplugin.language.DAFileType;
+import de.patrick246.intellij.digitalplugin.language.DALanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

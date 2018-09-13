@@ -1,4 +1,4 @@
-package de.patrick246.intellij.digitalplugin;
+package de.patrick246.intellij.digitalplugin.language;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import org.jetbrains.annotations.NotNull;

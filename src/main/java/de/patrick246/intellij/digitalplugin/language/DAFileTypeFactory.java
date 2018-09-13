@@ -1,4 +1,4 @@
-package de.patrick246.intellij.digitalplugin;
+package de.patrick246.intellij.digitalplugin.language;
 
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;

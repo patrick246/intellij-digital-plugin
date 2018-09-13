@@ -1,9 +1,10 @@
-package de.patrick246.intellij.digitalplugin;
+package de.patrick246.intellij.digitalplugin.language;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import de.patrick246.intellij.digitalplugin.psi.DATypes;
 import com.intellij.lexer.FlexLexer;
+import de.patrick246.intellij.digitalplugin.language.psi.DATypes;
+
 
 %%
 %class DALexer
