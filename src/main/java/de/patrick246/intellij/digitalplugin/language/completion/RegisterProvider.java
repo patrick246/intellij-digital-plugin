@@ -37,6 +37,6 @@ public class RegisterProvider extends CompletionProvider<CompletionParameters> {
                 "BP",
                 "SP",
                 "RA"
-        ).map(LookupElementBuilder::create).collect(Collectors.toList()));
+        ).map(line -> LookupElementBuilder.create(line).withTypeText("Register")).collect(Collectors.toList()));
     }
 }

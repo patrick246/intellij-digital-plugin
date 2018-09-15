@@ -13,7 +13,7 @@
 }
 
 daFile ::= line (NEWLINE line)*
-line ::=  [label] [('.' directive | instruction)] [commentLine]
+private line ::=  [label] [('.' directive | instruction)] [commentLine]
 
 instruction ::= (simpleInstructionLine|
                             regRegInstructionLine|
@@ -25,18 +25,20 @@ instruction ::= (simpleInstructionLine|
                             regIndRegInstructionLine|
                             indCalcRegInstruction|
                             regIndCalcInstruction|
-                            commentLine)
+                            commentLine) {recoverWhile=instruction_recover}
+
+private instruction_recover ::= !(NEWLINE)
 // various different formats for instruction parameters
 simpleInstructionLine ::= SIMPLEINSTRUCTION
-regRegInstructionLine ::= REGREGINSTRUCTION register COMMA register
-regImmInstructionLine ::= REGIMMINSTRUCTION register COMMA expr
-regInstructionLine ::= REGINSTRUCTION register
-immInstructionLine ::= IMMINSTRUCTION expr
-immRegInstructionLine ::= IMMREGINSTRUCTION expr COMMA register
-indRegRegInstructionLine ::= INDREGREGINSTRUCTION indRegister COMMA register
-regIndRegInstructionLine ::= REGINDREGINSTRUCTION register COMMA indRegister
-indCalcRegInstruction ::= INDCALCREGINSTRUCTION indCalcRegister COMMA register
-regIndCalcInstruction ::= REGINDCALCINSTRUCTION register COMMA indCalcRegister
+regRegInstructionLine ::= REGREGINSTRUCTION register COMMA register {pin=1}
+regImmInstructionLine ::= REGIMMINSTRUCTION register COMMA expr {pin=1}
+regInstructionLine ::= REGINSTRUCTION register {pin=1}
+immInstructionLine ::= IMMINSTRUCTION expr {pin=1}
+immRegInstructionLine ::= IMMREGINSTRUCTION expr COMMA register {pin=1}
+indRegRegInstructionLine ::= INDREGREGINSTRUCTION indRegister COMMA register {pin=1}
+regIndRegInstructionLine ::= REGINDREGINSTRUCTION register COMMA indRegister {pin=1}
+indCalcRegInstruction ::= INDCALCREGINSTRUCTION indCalcRegister COMMA register {pin=1}
+regIndCalcInstruction ::= REGINDCALCINSTRUCTION register COMMA indCalcRegister {pin=1}
 
 // parameter types
 register ::= (REGNUMBER | ALIAS)
@@ -45,7 +47,8 @@ commentLine ::= COMMENTCHAR COMMENTTEXT
 indCalcRegister ::= "[" register "+" expr "]"
 expr ::= term '+' expr | term '-' expr | term
 term ::= factor '*' term | factor '/' term | factor
-factor ::= '(' expr ')' | HEXNUM | ALIAS
+factor ::= '(' expr ')' | HEXNUM | constalias
+constalias ::= ALIAS
 
 // assembler directives
 directive ::= (aliasDirectiveLine | aliasRegisterDirectiveLine | stringDirectiveLine | aliasMultivalueDirectiveLine | aliasExprDirectiveLine)
