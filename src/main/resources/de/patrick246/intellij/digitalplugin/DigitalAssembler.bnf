@@ -13,7 +13,7 @@
 }
 
 daFile ::= line (NEWLINE line)*
-private line ::=  [label] [('.' directive | instruction)] [commentLine]
+line ::=  [label] [(directive | instruction)] [commentLine]
 
 instruction ::= (simpleInstructionLine|
                             regRegInstructionLine|
@@ -24,8 +24,7 @@ instruction ::= (simpleInstructionLine|
                             indRegRegInstructionLine|
                             regIndRegInstructionLine|
                             indCalcRegInstruction|
-                            regIndCalcInstruction|
-                            commentLine) {recoverWhile=instruction_recover}
+                            regIndCalcInstruction) {recoverWhile=instruction_recover}
 
 private instruction_recover ::= !(NEWLINE)
 // various different formats for instruction parameters
@@ -51,12 +50,14 @@ factor ::= '(' expr ')' | HEXNUM | constalias
 constalias ::= ALIAS
 
 // assembler directives
-directive ::= (aliasDirectiveLine | aliasRegisterDirectiveLine | stringDirectiveLine | aliasMultivalueDirectiveLine | aliasExprDirectiveLine)
+directive ::= "." (aliasDirectiveLine | addressDirective | aliasRegisterDirectiveLine | stringDirectiveLine | aliasMultivalueDirectiveLine | aliasExprDirectiveLine) {pin=1}
+addressDirective ::= ADDRESSDIRECTIVE HEXNUM
 aliasDirectiveLine ::= ALIASDIRECTIVE ALIAS
 aliasRegisterDirectiveLine ::= ALIASREGISTERDIRECTIVE registerAliasDefinition REGNUMBER
 registerAliasDefinition ::= ALIASDEFINITIONTOKEN
 stringDirectiveLine ::=  STRINGDIRECTIVE STRINGTEXT
-aliasMultivalueDirectiveLine ::= ALIASMULTIVALUEDIRECTIVE expr (',' expr)*
+//aliasMultivalueDirectiveLine ::= ALIASMULTIVALUEDIRECTIVE constalias STRINGTEXT
+aliasMultivalueDirectiveLine ::= ALIASMULTIVALUEDIRECTIVE constalias (STRINGTEXT  | expr) (',' expr)*
 aliasExprDirectiveLine ::= ALIASEXPRDIRECTIVE immediateAliasDefinition expr
 immediateAliasDefinition ::= ALIASDEFINITIONTOKEN
 

@@ -4,10 +4,7 @@ import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionType;
-import com.intellij.patterns.PlatformPatterns;
-import de.patrick246.intellij.digitalplugin.language.DALanguage;
 import de.patrick246.intellij.digitalplugin.language.psi.DAConstalias;
-import de.patrick246.intellij.digitalplugin.language.psi.DARegRegInstructionLine;
 import de.patrick246.intellij.digitalplugin.language.psi.DARegister;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,10 +15,14 @@ public class DACompletionContributor extends CompletionContributor {
         extend(CompletionType.BASIC, psiElement().withParent(DARegister.class), new RegisterProvider());
         extend(CompletionType.BASIC, psiElement().withParent(DARegister.class), new RegisterAliasProvider());
         extend(CompletionType.BASIC, psiElement().withParent(DAConstalias.class), new ConstAliasProvider());
+        extend(CompletionType.BASIC, InstructionProvider.PATTERN, new InstructionProvider());
+        extend(CompletionType.BASIC, DirectiveProvider.PATTERN, new DirectiveProvider());
+        extend(CompletionType.BASIC, MacroProvider.PATTERN, new MacroProvider());
     }
 
     @Override
-    public void fillCompletionVariants(@NotNull CompletionParameters parameters, @NotNull CompletionResultSet result) {
+    public void fillCompletionVariants(@NotNull CompletionParameters parameters, @NotNull CompletionResultSet result) { // NOSONAR
+        // a breakpoint here is useful for debugging completions
         super.fillCompletionVariants(parameters, result);
     }
 }

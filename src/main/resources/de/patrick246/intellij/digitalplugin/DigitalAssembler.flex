@@ -56,11 +56,13 @@ STRING=\"([^\"\\]|\\.)*\"
 
 <YYINITIAL> "const" {yybegin(AFTER_REG_DIRECTIVE); return DATypes.ALIASEXPRDIRECTIVE;}
 
-<YYINITIAL> "long"|"org"|"word"|"dorg" {yybegin(AFTER_DIRECTIVE); return DATypes.ALIASDIRECTIVE;}
+<YYINITIAL> "long"|"word" {yybegin(AFTER_DIRECTIVE); return DATypes.ALIASDIRECTIVE;}
 
 <YYINITIAL> "include" {yybegin(AFTER_DIRECTIVE); return DATypes.STRINGDIRECTIVE;}
 
 <YYINITIAL> "data" {yybegin(AFTER_DIRECTIVE); return DATypes.ALIASMULTIVALUEDIRECTIVE;}
+
+<YYINITIAL> "org"|"dorg" {yybegin(AFTER_DIRECTIVE); return DATypes.ADDRESSDIRECTIVE;}
 
 <YYINITIAL> {ALIAS_FIRST_CHAR}{ALIAS_NEXT} {yybegin(IN_LABEL); return DATypes.LABELDEFINITION;}
 
@@ -78,7 +80,7 @@ STRING=\"([^\"\\]|\\.)*\"
 
 {WHITE_SPACE} {return TokenType.WHITE_SPACE;}
 
-<AFTER_INST,AFTER_DIRECTIVE> {ALIAS_FIRST_CHAR}{ALIAS_NEXT} {yybegin(AFTER_INST); return DATypes.ALIAS;}
+<AFTER_INST,AFTER_DIRECTIVE> {ALIAS_FIRST_CHAR}{ALIAS_NEXT} {return DATypes.ALIAS;}
 
 <AFTER_INST> "," { return DATypes.COMMA;}
 

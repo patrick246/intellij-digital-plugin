@@ -38,3 +38,37 @@ sourceSets {
         }
     }
 }
+
+task generateLexer(type: GenerateLexer) {
+    // source flex file
+    source = "src/main/resources/de/patrick246/intellij/digitalplugin/DigitalAssembler.flex"
+
+    // target directory for lexer
+    targetDir = "src/main/gen/de/patrick246/intellij/digitalplugin/language"
+
+    // target classname, target file will be targetDir/targetClass.java
+    targetClass = "DALexer"
+
+    // if set, plugin will remove a lexer output file before generating new one. Default: false
+    purgeOldFiles = true
+}
+
+task generateParser(type: GenerateParser) {
+    // source bnf file
+    source = "src/main/resources/de/patrick246/intellij/digitalplugin/DigitalAssembler.bnf"
+
+    // optional, task-specific root for the generated files. Default: none
+    targetRoot = 'src/main/gen'
+
+    // path to a parser file, relative to the targetRoot
+    pathToParser = '/de/patrick246/intellij/digitalplugin/parser/DAParser.java'
+
+    // path to a directory with generated psi files, relative to the targetRoot
+    pathToPsiRoot = '/de/patrick246/intellij/digitalplugin/psi'
+
+    // if set, plugin will remove a parser output file and psi output directory before generating new ones. Default: false
+    purgeOldFiles = true
+}
+
+generateLexer.dependsOn generateParser
+compileJava.dependsOn generateLexer
