@@ -1,6 +1,5 @@
 package de.patrick246.intellij.digitalassembler.jpsplugin;
 
-import com.intellij.openapi.roots.ModuleRootManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.builders.BuildTargetLoader;
 import org.jetbrains.jps.builders.BuildTargetType;
@@ -8,17 +7,15 @@ import org.jetbrains.jps.model.JpsModel;
 import org.jetbrains.jps.model.JpsUrlList;
 import org.jetbrains.jps.model.module.JpsModule;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,12 +34,12 @@ public class DABuildTargetType extends BuildTargetType<DABuildTarget> {
                 .stream()
                 .map(JpsModule::getContentRootsList)
                 .map(JpsUrlList::getUrls)
-                .flatMap(List::stream)
+                .flatMap(Collection::stream)
                 .map(this::uriHelper)
                 .filter(Objects::nonNull)
                 .map(Paths::get)
                 .flatMap(this::walkHelper)
-                .filter(path -> path.getFileName().endsWith(".dasm"))
+                .filter(path -> path.getFileName().toString().endsWith(".dasm"))
                 .map(path -> new DABuildTarget(path.toString()))
                 .collect(Collectors.toList());
     }

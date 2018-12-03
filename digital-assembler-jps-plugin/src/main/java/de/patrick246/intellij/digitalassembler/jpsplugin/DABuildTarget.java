@@ -30,7 +30,7 @@ public class DABuildTarget extends BuildTarget<DABuildRootDescriptor> {
 
     @Override
     public String getId() {
-        return "DABuildTarget";
+        return "DABuildTarget:" + asmFile.getAbsolutePath();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class DABuildTarget extends BuildTarget<DABuildRootDescriptor> {
     @NotNull
     @Override
     public String getPresentableName() {
-        return "DA Build Target";
+        return "Assembling " + asmFile.getName();
     }
 
     @NotNull

@@ -18,6 +18,11 @@ public class DABuilder extends TargetBuilder<DABuildRootDescriptor, DABuildTarge
     }
 
     @Override
+    public void buildStarted(CompileContext context) {
+        super.buildStarted(context);
+    }
+
+    @Override
     public void build(@NotNull DABuildTarget target, @NotNull DirtyFilesHolder<DABuildRootDescriptor, DABuildTarget> holder, @NotNull BuildOutputConsumer outputConsumer, @NotNull CompileContext context) throws ProjectBuildException, IOException {
         context.processMessage(new CompilerMessage("Digital Assembler", BuildMessage.Kind.ERROR, "Hello World"));
     }
