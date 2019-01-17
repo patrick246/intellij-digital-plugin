@@ -1,11 +1,11 @@
 <idea-plugin>
     <id>de.patrick246.intellij-digital-plugin</id>
-    <name>Plugin display name here</name>
+    <name>Digital Assembler</name>
     <vendor email="pat.hahn.16@lehre.mosbach.dhbw.de" url="https://patrick246.de">Patrick Hahn</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    Digital Assembler IntelliJ Plugin.
+    Supports programming for the digital assembler from the IntelliJ IDE
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -23,6 +23,7 @@
         <programRunner implementation="de.patrick246.intellij.digitalplugin.debugger.runner.DADebugRunner" />
         <configurationType implementation="de.patrick246.intellij.digitalplugin.debugger.configuration.DAConfigurationType" />
         <sdkType implementation="de.patrick246.intellij.digitalplugin.toolset.DASdk" />
+        <compileServer.plugin classpath="digital-assembler-jps-plugin.jar;asm3.jar" />
     </extensions>
 
     <actions>
