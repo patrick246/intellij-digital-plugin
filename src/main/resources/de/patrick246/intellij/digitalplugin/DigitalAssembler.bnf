@@ -20,6 +20,7 @@ instruction ::= (simpleInstructionLine|
                             regImmInstructionLine|
                             regInstructionLine|
                             immInstructionLine|
+                            immOptInstructionLine|
                             immRegInstructionLine|
                             indRegRegInstructionLine|
                             regIndRegInstructionLine|
@@ -33,6 +34,7 @@ regRegInstructionLine ::= REGREGINSTRUCTION register COMMA register {pin=1}
 regImmInstructionLine ::= REGIMMINSTRUCTION register COMMA expr {pin=1}
 regInstructionLine ::= REGINSTRUCTION register {pin=1}
 immInstructionLine ::= IMMINSTRUCTION expr {pin=1}
+immOptInstructionLine ::= IMMOPTINSTRUCTION [expr] {pin=1}
 immRegInstructionLine ::= IMMREGINSTRUCTION expr COMMA register {pin=1}
 indRegRegInstructionLine ::= INDREGREGINSTRUCTION indRegister COMMA register {pin=1}
 regIndRegInstructionLine ::= REGINDREGINSTRUCTION register COMMA indRegister {pin=1}
@@ -44,7 +46,7 @@ register ::= (REGNUMBER | ALIAS)
 indRegister ::= "[" register "]"
 commentLine ::= COMMENTCHAR COMMENTTEXT
 indCalcRegister ::= "[" register "+" expr "]"
-expr ::= term '+' expr | term '-' expr | term
+expr ::= (term '+' expr | term '-' expr | term)
 term ::= factor '*' term | factor '/' term | factor
 factor ::= '(' expr ')' | HEXNUM | constalias
 constalias ::= ALIAS

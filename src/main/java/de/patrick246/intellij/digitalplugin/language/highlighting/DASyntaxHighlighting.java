@@ -35,6 +35,7 @@ public class DASyntaxHighlighting extends SyntaxHighlighterBase {
             tokenType.equals(DATypes.REGIMMINSTRUCTION) ||
             tokenType.equals(DATypes.IMMREGINSTRUCTION) ||
             tokenType.equals(DATypes.IMMINSTRUCTION) ||
+            tokenType.equals(DATypes.IMMOPTINSTRUCTION) ||
             tokenType.equals(DATypes.INDCALCREGINSTRUCTION) ||
             tokenType.equals(DATypes.INDREGREGINSTRUCTION) ||
             tokenType.equals(DATypes.REGINDCALCINSTRUCTION) ||

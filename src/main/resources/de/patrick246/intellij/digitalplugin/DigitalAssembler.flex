@@ -14,13 +14,15 @@ import de.patrick246.intellij.digitalplugin.language.psi.DATypes;
 %type IElementType
 %eof{ return;
 %eof}
+%ignorecase
+
 
 CLRF=(\r|\n|\r\n)
 WHITE_SPACE=[\ \t]
 TEXT=[^\n]+
 ALIAS_FIRST_CHAR=[a-zA-Z_]
 ALIAS_NEXT=[a-zA-Z0-9_]*
-REGNUMBER=(R([0-9]|11|12))|BP|SP|RA
+REGNUMBER=(R([0-9]|10|11|12))|BP|SP|RA
 HEXNUMBER=(0x)?[0-9a-fA-F]+
 STRING=\"([^\"\\]|\\.)*\"
 
@@ -50,7 +52,9 @@ STRING=\"([^\"\\]|\\.)*\"
 
 <YYINITIAL> "LDD" {yybegin(AFTER_INST); return DATypes.REGINDCALCINSTRUCTION;}
 
-<YYINITIAL> "BRCS"|"BREQ"|"BRMI"|"BRCC"|"BRNE"|"BRPL"|"JMP"|"RET"|"CALL"|"ENTER"|"_SCALL" {yybegin(AFTER_INST); return DATypes.IMMINSTRUCTION;}
+<YYINITIAL> "BRCS"|"BREQ"|"BRMI"|"BRCC"|"BRNE"|"BRPL"|"JMP"|"CALL"|"ENTER"|"_SCALL" {yybegin(AFTER_INST); return DATypes.IMMINSTRUCTION;}
+
+<YYINITIAL> "RET" {yybegin(AFTER_INST); return DATypes.IMMOPTINSTRUCTION;}
 
 <YYINITIAL> "reg" {yybegin(AFTER_REG_DIRECTIVE); return DATypes.ALIASREGISTERDIRECTIVE;}
 
