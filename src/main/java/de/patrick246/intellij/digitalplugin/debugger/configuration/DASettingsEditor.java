@@ -14,23 +14,26 @@ public class DASettingsEditor extends SettingsEditor<DARunConfiguration> {
 
     private JComponent panel;
     private LabeledComponent<ComponentWithBrowseButton> asmFile;
+    private JCheckBox debugMode;
     private TextFieldWithBrowseButton textFieldWithBrowseButton;
-
 
     public DASettingsEditor(Project project) {
         textFieldWithBrowseButton = new TextFieldWithBrowseButton();
-        textFieldWithBrowseButton.addBrowseFolderListener("ASM File", "Choose an assembler file", project, FileChooserDescriptorFactory.createSingleFileDescriptor());
+        textFieldWithBrowseButton.addBrowseFolderListener("ASM File", "Choose an assembler file", project, FileChooserDescriptorFactory.createSingleFileDescriptor("hex"));
         asmFile.setComponent(textFieldWithBrowseButton);
+
     }
 
     @Override
     protected void resetEditorFrom(@NotNull DARunConfiguration s) {
         this.textFieldWithBrowseButton.setText(s.getAsmFilePath());
+        this.debugMode.setSelected(s.getDebugMode());
     }
 
     @Override
     protected void applyEditorTo(@NotNull DARunConfiguration s) {
         s.setAsmFilePath(this.textFieldWithBrowseButton.getText());
+        s.setDebugMode(this.debugMode.isSelected());
     }
 
     @NotNull
