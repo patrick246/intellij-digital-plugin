@@ -4,20 +4,11 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.LogicalPosition;
-import com.intellij.openapi.editor.ScrollType;
-import com.intellij.openapi.editor.markup.HighlighterLayer;
-import com.intellij.openapi.editor.markup.TextAttributes;
-import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFileSystem;
-import com.intellij.ui.JBColor;
 import de.patrick246.intellij.digitalplugin.component.CurrentExecutionComponent;
 import de.patrick246.intellij.digitalplugin.component.DebugHighlighter;
 import de.patrick246.intellij.digitalplugin.debugger.runner.DigitalHexRunner;
 
-import java.awt.*;
 import java.io.File;
 
 public class SingleStepAction extends AnAction {

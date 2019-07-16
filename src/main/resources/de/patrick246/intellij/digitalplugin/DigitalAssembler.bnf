@@ -58,8 +58,7 @@ aliasDirectiveLine ::= ALIASDIRECTIVE ALIAS
 aliasRegisterDirectiveLine ::= ALIASREGISTERDIRECTIVE registerAliasDefinition REGNUMBER
 registerAliasDefinition ::= ALIASDEFINITIONTOKEN
 stringDirectiveLine ::=  STRINGDIRECTIVE STRINGTEXT
-//aliasMultivalueDirectiveLine ::= ALIASMULTIVALUEDIRECTIVE constalias STRINGTEXT
-aliasMultivalueDirectiveLine ::= ALIASMULTIVALUEDIRECTIVE constalias (STRINGTEXT  | expr) (',' expr)*
+aliasMultivalueDirectiveLine ::= ALIASMULTIVALUEDIRECTIVE constalias (STRINGTEXT  | expr) (',' [NEWLINE] expr)*
 aliasExprDirectiveLine ::= ALIASEXPRDIRECTIVE immediateAliasDefinition expr
 immediateAliasDefinition ::= ALIASDEFINITIONTOKEN
 

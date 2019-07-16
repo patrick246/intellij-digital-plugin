@@ -25,6 +25,7 @@ ALIAS_NEXT=[a-zA-Z0-9_]*
 REGNUMBER=(R([0-9]|10|11|12))|BP|SP|RA
 HEXNUMBER=(0x)?[0-9a-fA-F]+
 STRING=\"([^\"\\]|\\.)*\"
+CHAR=\'.\'
 
 %state AFTER_INST
 %state AFTER_DIRECTIVE
@@ -88,7 +89,7 @@ STRING=\"([^\"\\]|\\.)*\"
 
 <AFTER_INST> "," { return DATypes.COMMA;}
 
-<AFTER_INST, AFTER_DIRECTIVE, AFTER_REG_DIRECTIVE> {HEXNUMBER} {yybegin(AFTER_INST); return DATypes.HEXNUM;}
+{HEXNUMBER} {yybegin(AFTER_INST); return DATypes.HEXNUM;}
 
 {CLRF} {yybegin(YYINITIAL); return DATypes.NEWLINE;}
 
